@@ -28,11 +28,15 @@
             const number = document.getElementById("number").value;
             const date = document.getElementById("call").value;
             const time = document.getElementById("time").value;
-            localStorage.setItem("fname", firstName);
-            localStorage.setItem("email", email);
-            localStorage.setItem("PhoneNumber", number);
-            localStorage.setItem("date",date);
-            localStorage.setItem("time", time);
+            let user_detail={
+                "fname":firstName,
+                "email":email,
+                "phonenumber":number,
+                "date":date,
+                "Time":time
+            }
+           let user_details=JSON.stringify(user_detail);
+            localStorage.setItem("userdetails",user_details);
         }
 
     </script>
