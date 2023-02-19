@@ -1,7 +1,6 @@
 // //selecting form 
 const ul = document.getElementById("text1");
 //     // adding events
-//     form.addEventListener("onclick", addbtn);
 
 function getformvalue(event) {
     event.preventDefault();
@@ -13,33 +12,33 @@ function getformvalue(event) {
         "email": email,
         "Phonenumber": number
     }
-    let user_details = [];
-    user_details.push(JSON.stringify(userdetails));
-    if (localStorage.getItem("userdetails") == null) {
-        localStorage.setItem("userdetails", user_details);
-    } else {
-        let old_data = JSON.parse(localStorage.getItem("userdetails"));
-        user_details.push(JSON.stringify(old_data));
-        localStorage.setItem("userdetails", user_details);
-    }
+    let user_Details = JSON.stringify(userdetails);
+    localStorage.setItem(userdetails.email, user_Details)
     const li = document.createElement("li");
     li.className = "list-group";
-    li.textContent = localStorage.getItem("userdetails");
-    const dltbtn=document.createElement("button");
-    dltbtn.value="delete";
-    li.appendChild(dltbtn);
+    li.textContent = userdetails.name + "  " + userdetails.email + "  " + userdetails.Phonenumber;
     ul.appendChild(li);
-
+    const dltbtn = document.createElement("input");
+    dltbtn.type = "button";
+    dltbtn.value = "delete";
+    li.appendChild(dltbtn);
+    const editbtn = document.createElement("input");
+    editbtn.type = "button";
+    editbtn.value = "editbtn";
+    li.appendChild(editbtn);
+    dltbtn.onclick = () => {
+        localStorage.removeItem(userdetails.email);
+        ul.removeChild(li);
+    }
+    editbtn.onclick = () => {
+        localStorage.removeItem(userdetails.email);
+        let name1 = document.getElementById("name");
+        let email1 = document.getElementById("email");
+        let number1 = document.getElementById("phone")
+        name1.value = userdetails.name;
+        email1.value = userdetails.email;
+        number1.value = userdetails.Phonenumber;
+        ul.removeChild(li);
+    }
 }
 
-
-
-// //functions
-
-// function addbtn(e) {
-//     e.preventDefault();
-//     const dltbtn = document.createElement("button");
-//     dltbtn.className = "btn";
-//     dltbtn.value = "DELETE";
-
-// }
