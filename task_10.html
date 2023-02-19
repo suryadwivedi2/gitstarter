@@ -28,15 +28,26 @@
             const number = document.getElementById("number").value;
             const date = document.getElementById("call").value;
             const time = document.getElementById("time").value;
-            let user_detail={
-                "fname":firstName,
-                "email":email,
-                "phonenumber":number,
-                "date":date,
-                "Time":time
+            let user_detail = {
+                "fname": firstName,
+                "email": email,
+                "phonenumber": number,
+                "date": date,
+                "Time": time
             }
-           let user_details=JSON.stringify(user_detail);
-            localStorage.setItem("userdetails",user_details);
+            let user_details = [];
+            user_details.push(user_detail);
+            if (localStorage.getItem("userdetails") == null) {
+                localStorage.setItem("userdetails", JSON.stringify(user_details));
+            } else {
+                let old_data = JSON.parse(localStorage.getItem("userdetails"));
+                user_details.push(old_data);
+                localStorage.setItem("userdetails", JSON.stringify(user_details));
+            }
+
+            let text = document.getElementById("text1");
+            text.firstElementChild.textContent = localStorage.getItem("userdetails");
+
         }
 
     </script>
@@ -66,6 +77,9 @@
         </div>
     </div>
     </form>
+    <div id="text1" class="text">
+        <p></p>
+    </div>
 </body>
 
 </html>
