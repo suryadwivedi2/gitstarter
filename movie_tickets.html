@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>movie ticket with promises</title>
+    <script>
+        console.log("person1:SHows tickets");
+        console.log("person2:SHows tickets");
+
+        const premovie = async () => {
+            const wifebringingtickets = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve("ticket");
+                }, 1000)
+            });
+
+            const getpopcorn = new Promise((resolve, reject) => {
+                resolve("popcorn");
+            })
+            const getbutter = new Promise((resolve, reject) => {
+                resolve("butter");
+            })
+
+            const getcoldrinks = new Promise((resolve, reject) => {
+                resolve("colddrinks");
+            })
+            let ticket = await wifebringingtickets;
+            console.log("wife:i have tickets");
+            console.log("husband:we should go in");
+            console.log("wife:no i am hungry");
+
+            let addpopcorn = await getpopcorn;
+            console.log(`husband:i have ${addpopcorn}`);
+            console.log("husband:we should go in");
+            console.log("wife:i need butter on my popcorn");
+
+            let butter = await getbutter;
+            console.log(`husband: i have got${butter} on popcorn`);
+            console.log("wife:thank you can i also get coldrink");
+
+            let colddrink = await getcoldrinks;
+            console.log(`husband:honey here is your ${colddrink} grab it`);
+            console.log("wife:thank you! let go we getting late");
+            console.log("husband:thank you for your reminder");
+
+            return ticket;
+        }
+        premovie().then((m)=>{
+            console.log(`person3:shows ${m}`);
+        })
+        console.log("person4:shows ticket");
+        console.log("person5:shows ticket");
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
