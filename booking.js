@@ -1,5 +1,4 @@
-const ul = document.getElementById("text1");
-const text=document.getElementById("text22");
+
 
 //     // adding events
 function getformvalue(event) {
@@ -13,24 +12,46 @@ function getformvalue(event) {
         "Phonenumber": number
     }
 
-    axios.post("https://crudcrud.com/api/754749018ce04b7c9a62857d815d30fa/bookingdata",userdetails)
-    .then((resolve)=>{
-        console.log("success");
-    }).catch((reject)=>{
-        console.log("error");
-    })
-    }
+    axios.post("https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata", userdetails)
+        .then((resolve) => {
+            console.log("success");
+        }).catch((reject) => {
+            console.log("error");
+        })
+}
 
-    axios.get("https://crudcrud.com/api/754749018ce04b7c9a62857d815d30fa/bookingdata",{
-    
+axios.get("https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata", {
+
 })
-    .then((res)=>{
-        showouputonscreen(res.data)
-    }).catch((err)=>{
+    .then((res) => {
+        for (let i = 0; i < res.data.length; i++) {
+            showouputonscreen(res.data[i]);
+            
+        }
+    }).catch((err) => {
         console.log(err);
     })
 
 
-function showouputonscreen(data){
-text.innerHTML=JSON.stringify(data);
+function showouputonscreen(data) {
+    const ul = document.getElementById("text22");
+    const li = document.createElement("li");
+    li.id = "li1";
+    li.class = "lic";
+    li.textContent = JSON.stringify(data);
+    const dltbtn=document.createElement("input");
+    dltbtn.type="button";
+       dltbtn.id="dltbtn";
+    dltbtn.class="btn-danger";
+    dltbtn.value="X";
+    li.appendChild(dltbtn);   
+    ul.appendChild(li);
+   dltbtn.onclick=()=>{
+   axios.delete("https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata/64039612a997a303e87757df")
+   .then((resolve)=>{
+       ul.removeChild(li);
+   }).catch((error)=>{
+       console.log(error);
+   })
+   }
 }
