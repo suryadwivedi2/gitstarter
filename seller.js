@@ -15,7 +15,7 @@ li3.id = "isul";
 
 //ADDING ITEMS
 
-function getformvalue(event) {
+async function getformvalue(event) {
     event.preventDefault();
     const sp = document.getElementById("price").value;
     const name = document.getElementById("name").value;
@@ -25,26 +25,18 @@ function getformvalue(event) {
         "name": name,
         "category": category
     }
-
-    axios.post("https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata", shoppingdetails)
-        .then((resolve) => {
-            console.log("success");
-        }).catch((err) => {
-            console.log("error");
-        })
-
+    try {
+        const addata = await axios.post("https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata", shoppingdetails)
+        console.log("added")
+    } catch (err) {
+        console.log("error")
+    }
 
     if (category == "food") {
-        li1.textContent = sp + "  " + name + "  " + category;
+        li1.textContent = sp + " " + name + " " + category;
         li1.appendChild(dltbtn)
         ul1.appendChild(li1)
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
-                .then((resolve) => {
-                    console.log("deleted");
-                }).catch((err) => {
-                    console.log("error");
-                })
             ul1.removeChild(li1);
         }
     } else if (category == "electronics") {
@@ -52,42 +44,30 @@ function getformvalue(event) {
         li2.appendChild(dltbtn)
         ul2.appendChild(li2);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
-                .then((resolve) => {
-                    console.log("deleted");
-                }).catch((err) => {
-                    console.log("error");
-                })
             ul2.removeChild(li2);
         }
     } else {
-        li3.textContent = sp + "  " + name + "  " + category;
+        li3.textContent = sp + " " + name + " " + category;
         li3.appendChild(dltbtn)
         ul3.appendChild(li3);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
-                .then((resolve) => {
-                    console.log("deleted");
-                }).catch((err) => {
-                    console.log("error");
-                })
             ul3.removeChild(li3);
         }
     }
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-axios.get("https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata", {
-
-}).then((resolve) => {
-    //console.log(resolve.data);
-    for (let i = 0; i < resolve.data.length; i++) {
-        showscreenoutput(resolve.data[i]);
+async function getdata() {
+    try {
+        const resolve = await axios.get("https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata")
+        for (let i = 0; i < resolve.data.length; i++) {
+            showscreenoutput(resolve.data[i]);
+        }
+    } catch (err) {
+        console.log("error");
     }
-}).catch((error) => {
-    console.log("error")
-})
 
+}
+getdata();
 
 
 function showscreenoutput(data) {
@@ -111,7 +91,7 @@ function showscreenoutput(data) {
         li1.appendChild(dltbtn)
         ul1.appendChild(li1);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
@@ -124,7 +104,7 @@ function showscreenoutput(data) {
         li2.appendChild(dltbtn)
         ul2.appendChild(li2);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
@@ -137,7 +117,7 @@ function showscreenoutput(data) {
         li3.appendChild(dltbtn);
         ul3.appendChild(li3);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/5bf72407ddcc4469857a40a0a35c784d/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
@@ -146,7 +126,4 @@ function showscreenoutput(data) {
             ul3.removeChild(li3);
         }
     }
-
-
-
 }
