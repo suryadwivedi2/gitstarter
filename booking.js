@@ -1,26 +1,26 @@
 let s = true;
 let user_id=0;
 
-//     // adding events
+// adding events
 function getformvalue(event) {
     event.preventDefault();
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const number = document.getElementById("phone").value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phonenumber =document.getElementById('phone').value;
     let userdetails = {
-        "name": name,
-        "email": email,
-        "Phonenumber": number
+       "username":name,
+         "email":email,
+        "phonenumber":phonenumber
     }
     if (s == true) {
-        axios.post("https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata", userdetails)
-            .then((resolve) => {
+        axios.post('http://localhost:3000/user/add-user',userdetails)
+            .then((response) => {
                 console.log("success");
             }).catch((reject) => {
                 console.log("error");
             })
     } else if (s == false) {
-        axios.put(`https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata/${user_id}`, userdetails)
+        axios.put(`https://crudcrud.com/api/c951a84f4ab74ec0bcbba993d75efc3e/bookingdata/${user_id}`, userdetails)
             .then((res) => {
                 console.log("success");
             }).catch((err) => {
@@ -28,13 +28,12 @@ function getformvalue(event) {
             })
     }
 }
-axios.get("https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata", {
+axios.get("http://localhost:3000/user/get-user", {
 
 })
     .then((res) => {
         for (let i = 0; i < res.data.length; i++) {
             showouputonscreen(res.data[i]);
-
         }
     }).catch((err) => {
         console.log(err);
@@ -61,9 +60,9 @@ function showouputonscreen(data) {
     li.appendChild(editbtn);
     ul.appendChild(li);
     dltbtn.onclick = () => {
-        axios.delete(`https://crudcrud.com/api/3fc0cd66e4ed4088a35be50848129f88/bookingdata/${data._id}`)
+        ul.removeChild(li);
+        axios.delete(`http://localhost:3000/user/delete-user/${data.id}`)
             .then((resolve) => {
-                ul.removeChild(li);
             }).catch((error) => {
                 console.log(error);
             })

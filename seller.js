@@ -2,16 +2,7 @@
 const ul1 = document.getElementById("ful");
 const ul2 = document.getElementById("eul");
 const ul3 = document.getElementById("sul");
-const dltbtn = document.createElement("input");
-dltbtn.class = "btn-check";
-dltbtn.type = "button";
-dltbtn.value = "Delete";
-const li1 = document.createElement("li");
-li1.id = "iful";
-const li2 = document.createElement("li");
-li2.id = "ieul";
-const li3 = document.createElement("li");
-li3.id = "isul";
+
 
 //ADDING ITEMS
 
@@ -26,31 +17,80 @@ async function getformvalue(event) {
         "category": category
     }
     try {
-        const addata = await axios.post("https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata", shoppingdetails)
+        const adddata = await axios.post("https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata", shoppingdetails)
         console.log("added")
     } catch (err) {
         console.log("error")
     }
 
+
     if (category == "food") {
+        const dltbtn = document.createElement("input");
+        dltbtn.class = "btn-check";
+        dltbtn.type = "button";
+        dltbtn.value = "Delete";
+        const li1 = document.createElement("li");
+        li1.id = "iful";
+        const li2 = document.createElement("li");
+        li2.id = "ieul";
+        const li3 = document.createElement("li");
+        li3.id = "isul";
         li1.textContent = sp + " " + name + " " + category;
         li1.appendChild(dltbtn)
         ul1.appendChild(li1)
         dltbtn.onclick = () => {
+            axios.delete = (`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${shoppingdetails.name}`)
+                .then((resdolve) => {
+                    console.log("deleted")
+                }).catch((err) => {
+                    console.log("error");
+                })
             ul1.removeChild(li1);
         }
     } else if (category == "electronics") {
+        const dltbtn = document.createElement("input");
+        dltbtn.class = "btn-check";
+        dltbtn.type = "button";
+        dltbtn.value = "Delete";
+        const li1 = document.createElement("li");
+        li1.id = "iful";
+        const li2 = document.createElement("li");
+        li2.id = "ieul";
+        const li3 = document.createElement("li");
+        li3.id = "isul";
         li2.textContent = sp + "-" + name + "-" + category;
         li2.appendChild(dltbtn)
         ul2.appendChild(li2);
         dltbtn.onclick = () => {
+            axios.delete = (`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${shoppingdetails.name}`)
+                .then((resolve) => {
+                    console.log("deleted")
+                }).catch((err) => {
+                    console.log("error");
+                })
             ul2.removeChild(li2);
         }
     } else {
+        const dltbtn = document.createElement("input");
+        dltbtn.class = "btn-check";
+        dltbtn.type = "button";
+        dltbtn.value = "Delete";
+        const li1 = document.createElement("li");
+        li1.id = "iful";
+        const li2 = document.createElement("li");
+        li2.id = "ieul";
+        const li3 = document.createElement("li");
+        li3.id = "isul";
         li3.textContent = sp + " " + name + " " + category;
         li3.appendChild(dltbtn)
         ul3.appendChild(li3);
         dltbtn.onclick = () => {
+            axios.delete = (`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${shoppingdetails.name}`)
+                .then((resdolve) => {
+                    console.log("deleted")
+                }).catch((err) => {
+                    console.log("error");
+                })
             ul3.removeChild(li3);
         }
     }
@@ -58,7 +98,7 @@ async function getformvalue(event) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 async function getdata() {
     try {
-        const resolve = await axios.get("https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata")
+        const resolve = await axios.get("https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata")
         for (let i = 0; i < resolve.data.length; i++) {
             showscreenoutput(resolve.data[i]);
         }
@@ -91,7 +131,7 @@ function showscreenoutput(data) {
         li1.appendChild(dltbtn)
         ul1.appendChild(li1);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
@@ -104,7 +144,7 @@ function showscreenoutput(data) {
         li2.appendChild(dltbtn)
         ul2.appendChild(li2);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
@@ -117,7 +157,7 @@ function showscreenoutput(data) {
         li3.appendChild(dltbtn);
         ul3.appendChild(li3);
         dltbtn.onclick = () => {
-            axios.delete(`https://crudcrud.com/api/851ebfcb6bd149cb95a2d5ee488ba911/shoppingdata/${data._id}`)
+            axios.delete(`https://crudcrud.com/api/3f36d5b3ab424f739f0332da40d69d90/shoppingdata/${data._id}`)
                 .then((resolve) => {
                     console.log("deleted");
                 }).catch((err) => {
