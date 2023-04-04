@@ -53,9 +53,9 @@ function showonscreen(data) {
     editbtn.className = "edt btn-md";
     dltbtn.type = "button";
     editbtn.type = "button";
-    dltbtn.appendChild(document.createTextNode("X"));
+    dltbtn.appendChild(document.createTextNode("delete"));
     editbtn.appendChild(document.createTextNode("edit"));
-    li.textContent = JSON.stringify(data.amount) + "-" + JSON.stringify(data.description) + "-" + JSON.stringify(data.category);
+    li.textContent = JSON.parse(data.amount) + "-" + data.description + "-" +data.category;
     li.appendChild(dltbtn);
     li.appendChild(editbtn);
     ul.appendChild(li);
